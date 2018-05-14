@@ -2,10 +2,10 @@
    <div style="padding:20px;" id="app">
        
         <div class="panel panel-primary">
-            <div class="panel-heading">用户管理</div>
+            <!-- <div class="panel-heading">用户管理</div> -->
             <div class="gn-wrap">
-                <span class="add-datas" @click="open">新增数据</span> 
-                <input type="text" placeholder="查询" class="search" @input="search">
+                <!-- <span class="add-datas" @click="open" v-if="addDataBtn">新增数据</span>  -->
+                <!-- <input type="text" placeholder="查询" class="search" @input="search"> -->
                 <!-- <input type="text" placeholder="search" @input="search" list="cars" class="search">
                 <datalist id="cars">
                     <option v-for="item in searchlist" :value="item"></option>
@@ -22,24 +22,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for ="(item,index) in setSlist">
+                    <tr v-for ="(item,index) in datas">
                       <td nowrap>{{index+1}}</td>
                       <td nowrap>{{item.name}}</td>
                       <td nowrap>{{item.age}}</td>
                       <td nowrap>{{item.school}}</td>
-                      <td nowrap><a href="javascript:void(0);" @click="remove(index)">删除</a>|<a href="javascript:void(0);" @click="modifyData(index)">修改</a></td>
+                      <td nowrap><a class="dosm" v-if="ifRemove" href="javascript:void(0);" @click="ifRemove(index)">删除</a><a  class="dosm" v-if="isModifyData" href="javascript:void(0);" @click="isModifyData(index)">修改</a></td>
                     </tr>
-                    <!-- <tr>
-                      <td nowrap></td>
-                      <td nowrap><input type="text"  id="name" v-model="user.name"/></td>
-                      <td nowrap><input type="text" id="age"v-model="user.age"/></td>
-                      <td nowrap><input type="text" id="school"v-model="user.school"/></td>
-                      <td nowrap><button @click="insert">insert</button></td>
-                    </tr> -->
                 </tbody>
             </table>
         </div>
-        <div class="add-data-table"  v-if="addDataShow" >
+        <!-- <div class="add-data-table"  v-if="addDataShow" >
             <div class="data-wrap"  >
                 <h4>新增</h4>
                 <div class="label-wrap">
@@ -67,11 +60,12 @@
                 <button class="comfirm-btn" @click="comfirmModifyData(selected)">确定</button>
             </div>
             
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
+// 表格组件比较好的
 export default {
   name: "hello",
   props:{
@@ -89,106 +83,134 @@ export default {
       },
         datas:{
             type:Array,
-        }
+            default:[
+                 { name: "李磊", age: "25", school: "洛阳理工" },
+                { name: "张成", age: "23", school: "桂林电子科技" },
+                { name: "炼心", age: "22", school: "江西电子科技" }
+            ]
+        },
+        ifRemove:{
+            type:Function,
+            default:this.remove
+        },
+        isModifyData:{
+            type:Function,
+            default:this.modifyData
+        },
+        insert:{
+            type:Function,
+        },
+        // addDataBtn:{
+        //     type:Boolean,
+        //     default:false
+        // }
+
 
   },
   data() {
     return {
-      addDataShow: false,
+    //   addDataShow: false,
     //   user: { name: "", age: "", school: "" },
-      name:"",
-      age:"",
-      school:"",
-      users: [
-        { name: "李磊", age: "25", school: "洛阳理工" },
-        { name: "张成", age: "23", school: "桂林电子科技" },
-        { name: "炼心", age: "22", school: "江西电子科技" }
-      ],
-      selected:"",
-      selectedlist:{},
-      setSlist:"",//显示的数据
+    //   name:"",
+    //   age:"",
+    //   school:"",
+    //   users: [
+    //     { name: "李磊", age: "25", school: "洛阳理工" },
+    //     { name: "张成", age: "23", school: "桂林电子科技" },
+    //     { name: "炼心", age: "22", school: "江西电子科技" }
+    //   ],
+    //   selected:"",
+    //   selectedlist:{},
+    //   setSlist:"",//显示的数据
     };
   },
-  created(){
+//   created(){
       
-        this.setSlist = this.users;
+//         this.setSlist = this.users;
       
        
-  },
+//   },
+//   created(){
+      
+//         this.setSlist = this.users;
+      
+       
+//   },
   methods: {
-    insert() {
+    // insert() {
       //插入数据
-      this.users.push(
-          { name: this.name, age: this.age, school: this.school }
-      );
-      this.setSlist = this.users;
-      this.addDataShow = false;
+    //   this.users.push(
+    //       { name: this.name, age: this.age, school: this.school }
+    //   );
+    //   this.setSlist = this.users;
+    //   this.addDataShow = false;
+      
+    // },
+    remove(index) {
+        // if(this.ifRemove){
+        //     //删除数据
+        //     this.setSlist.splice(index, 1);
+        // }
       
     },
-    remove(index) {
-      //删除数据
-      this.setSlist.splice(index, 1);
-    },
     // 打开新增窗口
-    open(){
-        this.addDataShow =!this.addDataShow;
-        this.empty();
-    },
-    empty(){
-        this.name = "",
-        this.age = "",
-        this.school = ""
-    },
+    // open(){
+    //     this.addDataShow =!this.addDataShow;
+    //     this.empty();
+    // },
+    // empty(){
+    //     this.name = "",
+    //     this.age = "",
+    //     this.school = ""
+    // },
     // 修改数据
-    modifyData(index) {debugger
-        this.selected = index; // 修改的位置
-        this.selectedlist=this.setSlist[index];
-        this.addDataShow = true;
+    modifyData(index) {
+        
     },
     // 确认修改
-    comfirmModifyData(index){
-        this.setSlist[index]=this.selectedlist
-        this.addDataShow = false;
-    },
+    // comfirmModifyData(index){
+    //     this.setSlist[index]=this.selectedlist
+    //     this.addDataShow = false;
+    // },
     // 搜索
     // search(){
     //     console.log("111111111")
     // }
-    search(e) {
-        var v = e.target.value,
-            self = this;
-        self.searchlist = [];
-        if (v) {
-            var ss = [];
+    // search(e) {
+    //     var v = e.target.value,
+    //         self = this;
+    //     self.searchlist = [];
+    //     if (v) {
+    //         var ss = [];
 
-            // 过滤需要的数据
-            this.users.forEach(function (item) {
-                // 检测用户名
-                if (item.name.indexOf(v) > -1) {
-                    if (self.searchlist.indexOf(item.name) == -1) {
-                        self.searchlist.push(item.name);
-                    }
-                    ss.push(item);
-                } else if (item.age.indexOf(v) > -1) {
-                    // 检测邮箱
-                    if (self.searchlist.indexOf(item.age) == -1) {
-                        self.searchlist.push(item.age);
-                    }
-                    ss.push(item);
-                }else if (item.school.indexOf(v) > -1) {
-                    // 检测邮箱
-                    if (self.searchlist.indexOf(item.school) == -1) {
-                        self.searchlist.push(item.school);
-                    }
-                    ss.push(item);
-                }
-            });
-            this.setSlist = ss; // 将过滤后的数据给了slist
-        } else {
-            // 没有搜索内容，则展示全部数据
-            this.setSlist=this.users;
-        }
-    }
+    //         // 过滤需要的数据
+    //         this.users.forEach(function (item) {
+    //             // 检测用户名
+    //             if (item.name.indexOf(v) > -1) {
+    //                 if (self.searchlist.indexOf(item.name) == -1) {
+    //                     self.searchlist.push(item.name);
+    //                 }
+    //                 ss.push(item);
+    //             } else if (item.age.indexOf(v) > -1) {
+    //                 // 检测邮箱
+    //                 if (self.searchlist.indexOf(item.age) == -1) {
+    //                     self.searchlist.push(item.age);
+    //                 }
+    //                 ss.push(item);
+    //             }else if (item.school.indexOf(v) > -1) {
+    //                 // 检测邮箱
+    //                 if (self.searchlist.indexOf(item.school) == -1) {
+    //                     self.searchlist.push(item.school);
+    //                 }
+    //                 ss.push(item);
+    //             }
+    //         });
+    //         this.setSlist = ss; // 将过滤后的数据给了slist
+    //     } else {
+    //         // 没有搜索内容，则展示全部数据
+    //         this.setSlist=this.users;
+    //     }
+    // }
   },
   
 };
@@ -281,5 +303,8 @@ th {
 }
 .gn-wrap{
     overflow: hidden;
+}
+.dosm{
+    margin-right: 10px;
 }
 </style>

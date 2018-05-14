@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/easy-vue" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/myproject/myTestInzuipin" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/mytestcodezp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/notepad" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/testInzuipin" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vue-datasource" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/wc-view" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/webpack-vue-vueRouter" vcs="Git" />
+  </component>
+</project>
